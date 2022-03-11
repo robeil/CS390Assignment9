@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class ArrayQueueImpl {
 
+    //private int[] arr= new int[10];
     private int[] arr= new int[10];
     private int front = -1;
     private int rear = 0;
@@ -12,80 +13,77 @@ public class ArrayQueueImpl {
     public int peek() {
         //validation if the arr is empty or not
         if(isEmpty()){
-            System.out.println("The array is empty");
+            System.out.println("The is nothing to peek HERE.");
+            return -1;
+        } else {
+            return arr[front];
         }
-        int num = arr[++front];
-        front--;
-        return num;
-
     }
     //inserting new element at the end
     public void enqueue(int obj){
+        //validating if the array is full or not
         if(rear == arr.length){
             resize();
-            System.out.println("The is empty and I am doubling the size");
-        } else {
-            arr[rear++] = obj;
+            System.out.println("The size is full and I am doubling the size");
         }
-    //implement
+        if((isEmpty())) {
+        //if the array is empty increment only once
+            front++;
+        }
+           // rear++;
+            arr[rear++] = obj;
     }
     public int dequeue() {
-        int isRemoved = 0;
         //validating if the arr is empty or not
         if(isEmpty()){
-            System.out.println("The array is empty");
-        }else {
-            isRemoved = arr[++front];
+            return -1;
         }
-    //implement
-        return isRemoved;
+        int num = arr[front];
+        front++;
+        return num;
+       // return arr[front++];
     }
     public boolean isEmpty(){
-    //implement
-        return (front == arr.length-1);
+        //checking if the array is empty
+        return (front == -1 || front == rear);
     }
     public int size(){
-    //implement
-        return arr.length;
+    //calculating the size of the array
+        return (rear - front);
     }
     private void resize(){
-    //implement
-        int newLength = arr.length * 2;
-        arr = Arrays.copyOf(arr,newLength);
+      //resizing the array
+            int newLength = arr.length * 2;
+            arr = Arrays.copyOf(arr, newLength);
     }
+    public void printAll(){
 
+        System.out.print("{ ");
+        for(int i = front; i < rear; i++){
+            System.out.print( arr[i] + ", ");
+        }
+        System.out.print("}");
+    }
     public static void main(String[] args) {
 
         ArrayQueueImpl q = new ArrayQueueImpl();
 
-     q.enqueue(1);
-     q.enqueue(2);
-     q.enqueue(3);
-//        q.enqueue(4);
-//        q.enqueue(5);
-//        q.enqueue(6);
-//        q.enqueue(7);
-//        q.enqueue(8);
-//        q.enqueue(9);
-//        q.enqueue(10);
-//        q.enqueue(11);
-        System.out.println(q.peek());
-
-        System.out.println("------------------------");
-        System.out.print("{ ");
-    for(int i = 0; i < q.size(); i++){
-    System.out.print(q.dequeue() + " ");
-    }
-        System.out.print(" }");
-
-//       System.out.print("= " +q.dequeue() + "");
-//        System.out.print("= " +q.dequeue() + "");
-//        System.out.print("= " +q.dequeue() + "");
-//        System.out.print("= " +q.dequeue() + "");
-//        System.out.print("= " +q.dequeue() + "");
-//        System.out.print("= " +q.dequeue() + "");
-//        System.out.print("= " +q.dequeue() + "");
-//        System.out.print("= " +q.dequeue() + "");
-//        System.out.print("= " +q.dequeue() + "");
+        q.enqueue(1);
+        q.enqueue(2);
+        q.enqueue(3);
+        q.enqueue(4);
+        q.enqueue(5);
+        q.enqueue(6);
+        q.enqueue(7);
+        System.out.println("Size : "+ q.size());
+        System.out.println("Before operation ");
+        q.printAll();
+        System.out.println("\nPeeking before deleting " +q.peek());
+        System.out.println("Removing " +q.dequeue());
+        System.out.println("Peeking After deleting " +q.dequeue());
+        System.out.println("Size : "+ q.size());
+        System.out.println("After the operation ");
+        q.printAll();
+        System.out.println("\nIs isEmpty "+q.isEmpty());
     }
 }
