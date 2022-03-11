@@ -88,13 +88,13 @@ public class StackLinkedImpl<E>{
         StackLinkedImpl s = new StackLinkedImpl();
         s.push("Robeil");
         s.push("Keleab");
-        s.push("HAben");
+        s.push("Haben");
         s.push("Hannah");
         System.out.println(s.printAll());
         System.out.println("Size " +s.size());
         System.out.println("Peeking  " +s.peek());
         System.out.println("Popping "+s.pop());
-
+        System.out.println(s.printAll());
 
     }
 }
